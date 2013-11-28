@@ -93,7 +93,7 @@ class HoursController < ApplicationController
     @daily_totals = {}
 
     (@week_start..@week_end).each do |day|
-      @daily_totals[day.to_s(:param_date)] = TimeEntry.for_user(@user).spent_on(day).map(&:hours).inject(:+)
+      @daily_totals[day.to_s(:param_date)] = TimeEntry.for_user(@user).spent_on(day.to_s(:param_date)).map(&:hours).inject(:+)
     end
 
     @daily_issues = @week_issue_matrix.select{|k,v| v[@current_day.to_s(:param_date)]} if @current_day
